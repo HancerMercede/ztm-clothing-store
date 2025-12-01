@@ -1,10 +1,24 @@
-import categories from "../src/utils/Categories.json";
-import { CategoriesList } from "./components/categories/CategoriesList";
+import { Route, Routes } from "react-router-dom";
+import NavigationBar from "./routes/Navigation/NavigationBar";
+import Home from "./routes/home/Home";
+
+const Shop = () => {
+  return (
+    <>
+      <h1>I am a Shop page</h1>
+    </>
+  );
+};
 
 function App() {
   return (
     <>
-      <CategoriesList categories={categories} />
+      <Routes>
+        <Route path="/" element={<NavigationBar />}>
+          <Route index element={<Home />} />
+          <Route path="shop" element={<Shop />} />
+        </Route>
+      </Routes>
     </>
   );
 }
