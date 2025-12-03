@@ -3,37 +3,44 @@ import {
   getAuth,
   signInWithRedirect,
   signInWithPopup,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   type User,
+  type UserCredential,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-import type { Error } from "../../types";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCSQ0pVW73oGgdZs8aFlS5BHk5BLmsfEys",
-  authDomain: "clothing-store-5a1be.firebaseapp.com",
-  projectId: "clothing-store-5a1be",
-  storageBucket: "clothing-store-5a1be.firebasestorage.app",
-  messagingSenderId: "297587784664",
-  appId: "1:297587784664:web:c7339ee7ee53594f6290ad",
-  measurementId: "G-D830T62W6X",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth: User) => {
+export const createUserDocumentFromAuth = async (
+  userAuth: User,
+  additionalInformation = {}
+) => {
   if (!userAuth) return;
 
   const userDocRef = doc(db, "users", userAuth.uid);
@@ -49,6 +56,7 @@ export const createUserDocumentFromAuth = async (userAuth: User) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("error creating the user", error);
@@ -56,4 +64,13 @@ export const createUserDocumentFromAuth = async (userAuth: User) => {
   }
 
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+): Promise<UserCredential> => {
+  if (!email || !password) throw new Error("Missing email or password");
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
