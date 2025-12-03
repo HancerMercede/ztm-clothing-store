@@ -13,3 +13,13 @@ export interface CategoriesListProps {
 }
 
 export type Categories = Category[];
+
+export type userData = {
+  displayName: string;
+  email: string;
+  createdAt: Date;
+};
+
+export type Error = {
+  message: string;
+};

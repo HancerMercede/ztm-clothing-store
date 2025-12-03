@@ -4,9 +4,11 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  type User,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import type { Error } from "../../types";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCSQ0pVW73oGgdZs8aFlS5BHk5BLmsfEys",
@@ -31,13 +33,12 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth: User) => {
+  if (!userAuth) return;
+
   const userDocRef = doc(db, "users", userAuth.uid);
 
-  console.log(userDocRef);
-
   const userSnapshop = await getDoc(userDocRef);
-  console.log(userSnapshop.exists());
 
   if (!userSnapshop.exists()) {
     const { displayName, email } = userAuth;
@@ -50,7 +51,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         createdAt,
       });
     } catch (error) {
-      console.log("error creating the user", error.message);
+      console.log("error creating the user", error);
     }
   }
 
