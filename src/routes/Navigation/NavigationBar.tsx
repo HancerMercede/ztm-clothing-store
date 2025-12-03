@@ -6,7 +6,7 @@ const NavigationBar = () => {
     <>
       <div className="navigation">
         <Link className="logo-container" to="/">
-          <CrownLogo />
+          <CrownLogo className="logo" />
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to="/shop">
@@ -15,7 +15,7 @@ const NavigationBar = () => {
           <Link className="nav-link" to="/contact">
             CONTACT
           </Link>
-          <Link className="nav-link" to="/signIn">
+          <Link className="nav-link" to="/sign-in">
             SIGN IN
           </Link>
         </div>
