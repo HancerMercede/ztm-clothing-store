@@ -1,9 +1,10 @@
-import { FirebaseError, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithRedirect,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
   type User,
   type UserCredential,
@@ -73,4 +74,13 @@ export const createAuthUserWithEmailAndPassword = async (
   if (!email || !password) throw new Error("Missing email or password");
 
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const SignInAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+): Promise<UserCredential> => {
+  if (!email || !password) throw new Error("Missing email or password");
+
+  return await signInWithEmailAndPassword(auth, email, password);
 };
