@@ -2,10 +2,9 @@ import type { FormInputProps } from "../../types";
 import "./FormInput.styles.scss";
 
 const FormInput = ({ label, ...otherProps }: FormInputProps) => {
-  const valueLength = otherProps.value;
+  const value = otherProps.value;
 
-  const shouldShrink =
-    valueLength && typeof valueLength === "string" && valueLength.length > 0;
+  const shouldShrink = value && typeof value === "string" && value.length > 0;
 
   return (
     <div className="group">
