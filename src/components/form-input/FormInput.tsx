@@ -1,20 +1,17 @@
+import type { FormInputProps } from "../../types";
 import "./FormInput.styles.scss";
 
-interface FormInputProps {
-  label: string;
-  [x: string]: unknown;
-}
-
 const FormInput = ({ label, ...otherProps }: FormInputProps) => {
+  const valueLength = otherProps.value;
+
+  const shouldShrink =
+    valueLength && typeof valueLength === "string" && valueLength.length > 0;
+
   return (
     <div className="group">
       <input className="form-input" {...otherProps} />
       {label && (
-        <label
-          className={`${
-            otherProps.value.length ? "shrink" : ""
-          } form-input-label`}
-        >
+        <label className={`${shouldShrink ? "shrink" : ""} form-input-label`}>
           {label}
         </label>
       )}

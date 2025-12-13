@@ -1,3 +1,6 @@
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import { type User } from "firebase/auth";
+
 export interface Category {
   id: number;
   title: string;
@@ -14,12 +17,23 @@ export interface CategoriesListProps {
 
 export type Categories = Category[];
 
-export type userData = {
-  displayName: string;
-  email: string;
-  createdAt: Date;
+export type CurrentUser = User | null;
+
+export interface UserContextType {
+  currentUser: CurrentUser;
+  setCurrentUser: Dispatch<SetStateAction<CurrentUser>>;
+}
+
+export const defaultUserValue: UserContextType = {
+  currentUser: null,
+  setCurrentUser: () => {},
 };
 
-export type Error = {
-  message: string;
-};
+export interface UserProviderProps {
+  children: ReactNode;
+}
+
+export interface FormInputProps {
+  label: string;
+  [x: string]: unknown;
+}
