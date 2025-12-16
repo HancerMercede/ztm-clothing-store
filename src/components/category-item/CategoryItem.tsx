@@ -1,7 +1,7 @@
-import type { CategoryItemProps } from "../../types/index.ts";
+import type { CategoryItemProps } from "../../types";
 import "./category.styles.scss";
 
-export const CategoryItem = (category: CategoryItemProps) => {
+export const CategoryItem = ({ category }: CategoryItemProps) => {
   const { title, imageUrl } = category;
   return (
     <div className="category-container">
