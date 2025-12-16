@@ -1,4 +1,9 @@
-import type { Dispatch, ReactNode, SetStateAction } from "react";
+import type {
+  Dispatch,
+  InputHTMLAttributes,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import { type User } from "firebase/auth";
 
 export interface Category {
@@ -33,7 +38,10 @@ export interface UserProviderProps {
   children: ReactNode;
 }
 
-export interface FormInputProps {
+export interface DefaultFormInputProps {
   label: string;
   [x: string]: unknown;
 }
+
+export type FormInputProps = DefaultFormInputProps &
+  InputHTMLAttributes<HTMLInputElement>;
