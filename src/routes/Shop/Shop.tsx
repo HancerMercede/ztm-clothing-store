@@ -1,15 +1,14 @@
-import shop_data from "../../Shop-data.json";
-import "./Sho.styles.scss";
-export const Shop = () => {
-  return (
-    <div className="shop-container">
-      {shop_data.map((s) => (
-        <div key={s.id}>
-          <h1>{s.name}</h1>
-          <img src={s.imageUrl} />
+import { useContext } from "react";
+import { ProductsContext } from "../../context/Products/Products.Context";
 
-          <span>{s.price}</span>
-        </div>
+import "./Shop.styles.scss";
+import { ProductCard } from "../../components/ProductCard/ProductCard";
+export const Shop = () => {
+  const { products } = useContext(ProductsContext);
+  return (
+    <div className="products-container">
+      {products.map((p) => (
+        <ProductCard key={p.id} product={p} />
       ))}
     </div>
   );

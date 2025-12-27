@@ -6,6 +6,7 @@ import type {
 } from "react";
 import { type User } from "firebase/auth";
 
+// Category section
 export interface Category {
   id: number;
   title: string;
@@ -22,6 +23,7 @@ export interface CategoriesListProps {
 
 export type Categories = Category[];
 
+// User section
 export type CurrentUser = User | null;
 
 export interface UserContextType {
@@ -38,6 +40,7 @@ export interface UserProviderProps {
   children: ReactNode;
 }
 
+// Form inputs
 export interface DefaultFormInputProps {
   label: string;
   [x: string]: unknown;
@@ -45,3 +48,44 @@ export interface DefaultFormInputProps {
 
 export type FormInputProps = DefaultFormInputProps &
   InputHTMLAttributes<HTMLInputElement>;
+
+// Product section
+export interface Products {
+  products: Product[];
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+}
+
+export const DefaultProductsValue: Products = {
+  products: [],
+  setProducts: () => {},
+};
+
+export interface ProductsProviderProps {
+  children: ReactNode;
+}
+
+export interface ProductProps {
+  product: Product;
+}
+
+export interface Product {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+}
+
+// Cart section
+export interface CartContextData {
+  isCartOpen: boolean;
+  setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const CartDefaultValues: CartContextData = {
+  isCartOpen: false,
+  setIsCartOpen: () => {},
+};
+
+export interface CartProviderProps {
+  children: ReactNode;
+}

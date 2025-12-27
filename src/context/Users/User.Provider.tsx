@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { UserContext } from "./User.Context";
-import type { CurrentUser, UserContextType, UserProviderProps } from "../types";
+import type {
+  CurrentUser,
+  UserContextType,
+  UserProviderProps,
+} from "../../types";
 import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
-} from "../utils/Firebase/firebase";
+} from "../../utils/Firebase/firebase";
 import type { User } from "firebase/auth";
 
 export const UserProvider = ({ children }: UserProviderProps) => {
