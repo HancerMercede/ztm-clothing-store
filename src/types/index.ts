@@ -81,7 +81,8 @@ export interface CartContextData {
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
   cartItems: CartItem[];
-  addItemToCart: (productToAdd: CartItem) => void;
+  addItemToCart: (productToAdd: Product) => void;
+  cartCount: number;
 }
 
 export const CartDefaultValues: CartContextData = {
@@ -89,6 +90,7 @@ export const CartDefaultValues: CartContextData = {
   setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
+  cartCount: 0,
 };
 
 export interface CartProviderProps {
