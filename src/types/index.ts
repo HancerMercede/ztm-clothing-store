@@ -5,6 +5,7 @@ import type {
   SetStateAction,
 } from "react";
 import { type User } from "firebase/auth";
+import { CartItem } from "../components/Cart-Item/CartItem";
 
 // Category section
 export interface Category {
@@ -79,13 +80,26 @@ export interface Product {
 export interface CartContextData {
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  cartItems: CartItem[];
+  addItemToCart: (productToAdd: CartItem) => void;
 }
 
 export const CartDefaultValues: CartContextData = {
   isCartOpen: false,
   setIsCartOpen: () => {},
+  cartItems: [],
+  addItemToCart: () => {},
 };
 
 export interface CartProviderProps {
   children: ReactNode;
+}
+
+// This is a new object or interface extending Product
+export interface CartItem extends Product {
+  quantity: number;
+}
+
+export interface CartItemModel {
+  cartItem: CartItem;
 }
