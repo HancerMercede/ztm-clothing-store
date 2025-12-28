@@ -51,6 +51,13 @@ export type FormInputProps = DefaultFormInputProps &
   InputHTMLAttributes<HTMLInputElement>;
 
 // Product section
+export interface Product {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+}
+
 export interface Products {
   products: Product[];
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
@@ -67,13 +74,6 @@ export interface ProductsProviderProps {
 
 export interface ProductProps {
   product: Product;
-}
-
-export interface Product {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
 }
 
 // Cart section
