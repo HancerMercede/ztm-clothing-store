@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-import { defaultUserValue, type UserContextType } from "../../types/index";
+import { defaultUserValue } from "../../types/index";
 
-export const UserContext = createContext<UserContextType>(defaultUserValue);
+export const UserContext = createContext(defaultUserValue);

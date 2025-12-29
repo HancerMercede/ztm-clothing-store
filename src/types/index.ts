@@ -18,11 +18,9 @@ export interface CategoryItemProps {
   category: Category;
 }
 
-export interface CategoriesListProps {
+export type CategoriesListProps = {
   categories: Category[];
-}
-
-export type Categories = Category[];
+};
 
 // User section
 export type CurrentUser = User | null;
@@ -82,7 +80,10 @@ export interface CartContextData {
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
   cartItems: CartItem[];
   addItemToCart: (productToAdd: Product) => void;
+  removeItemFromCart: (productToAdd: Product) => void;
+  removeItemFromCheckOut: (productToAdd: Product) => void;
   cartCount: number;
+  cartTotal: number;
 }
 
 export const CartDefaultValues: CartContextData = {
@@ -90,7 +91,10 @@ export const CartDefaultValues: CartContextData = {
   setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
+  removeItemFromCart: () => {},
+  removeItemFromCheckOut: () => {},
   cartCount: 0,
+  cartTotal: 0,
 };
 
 export interface CartProviderProps {

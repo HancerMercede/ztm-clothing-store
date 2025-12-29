@@ -3,6 +3,7 @@ import NavigationBar from "./routes/Navigation/NavigationBar";
 import Home from "./routes/home/Home";
 import Authentication from "./routes/authentication/Authentication";
 import { Shop } from "./routes/Shop/Shop";
+import { CheckOut } from "./routes/CheckOut/CheckOut";
 
 export const Contact = () => {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="shop" element={<Shop />} />
           <Route path="contact" element={<Contact />} />
           <Route path="auth" element={<Authentication />} />
+          <Route path="checkout" element={<CheckOut />} />
         </Route>
       </Routes>
     </>
