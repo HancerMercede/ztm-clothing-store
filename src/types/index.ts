@@ -22,6 +22,10 @@ export type CategoriesListProps = {
   categories: Category[];
 };
 
+export interface CategoriesPreviewProps {
+  title: string;
+  products: Product[];
+}
 // User section
 export type CurrentUser = User | null;
 
@@ -56,14 +60,19 @@ export interface Product {
   price: number;
 }
 
+// This is a new interface to interact with the context of categories and the provider
+export interface CategoriesMap {
+  [x: string]: [];
+}
+
 export interface Products {
-  products: Product[];
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  categoriesMap: CategoriesMap;
+  setCategoriesMap: React.Dispatch<React.SetStateAction<CategoriesMap>>;
 }
 
 export const DefaultProductsValue: Products = {
-  products: [],
-  setProducts: () => {},
+  categoriesMap: {},
+  setCategoriesMap: () => {},
 };
 
 export interface ProductsProviderProps {
@@ -81,7 +90,7 @@ export interface CartContextData {
   cartItems: CartItem[];
   addItemToCart: (productToAdd: Product) => void;
   removeItemFromCart: (productToAdd: Product) => void;
-  removeItemFromCheckOut: (productToAdd: Product) => void;
+  clearItemFromCart: (productToAdd: Product) => void;
   cartCount: number;
   cartTotal: number;
 }
@@ -92,7 +101,7 @@ export const CartDefaultValues: CartContextData = {
   cartItems: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
-  removeItemFromCheckOut: () => {},
+  clearItemFromCart: () => {},
   cartCount: 0,
   cartTotal: 0,
 };
