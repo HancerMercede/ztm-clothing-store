@@ -1,6 +1,6 @@
 import type { CategoriesListProps } from "../../types";
 import { DirectoryItem } from "../Directory-Item/DirectoryItem";
-import "./categories.styles.scss";
+import "./Categories.styles.scss";
 
 export const CategoriesList = ({ categories }: CategoriesListProps) => {
   return (
