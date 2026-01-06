@@ -22,7 +22,7 @@ export type CategoriesListProps = {
   categories: Category[];
 };
 
-export interface CategoriesPreviewProps {
+export interface CategoryPreviewProps {
   title: string;
   products: Product[];
 }

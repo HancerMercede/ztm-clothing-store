@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/Users/User.Provider.tsx";
 import "./index.scss";
-import { CategoriesProvider } from "./context/Products/Categories.Provider.tsx";
+import { CategoriesProvider } from "./context/Categories/Categories.Provider.tsx";
 import { CartProvider } from "./context/Cart/Cart.Provider.tsx";
 
 createRoot(document.getElementById("root")!).render(
