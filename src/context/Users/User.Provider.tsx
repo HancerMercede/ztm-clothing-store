@@ -17,7 +17,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const value: UserContextType = { currentUser, setCurrentUser };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user: User) => {
+    const unsubscribe = onAuthStateChangedListener((user: User | null) => {
       if (user) createUserDocumentFromAuth(user);
 
       setCurrentUser(user);
