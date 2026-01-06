@@ -1,4 +1,4 @@
-import { CategoriesList } from "../../components/categories/CategoriesList";
+import { CategoriesList } from "../../components/Categories/CategoriesList";
 import categories from "../../utils/Categories.json";
 
 const Home = () => {

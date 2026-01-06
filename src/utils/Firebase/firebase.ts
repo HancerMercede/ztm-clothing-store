@@ -10,11 +10,22 @@ import {
   type User,
   type UserCredential,
   onAuthStateChanged,
-  type Unsubscribe,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+  type DocumentData,
+} from "firebase/firestore";
+import type { Category } from "../../types";
 
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -40,6 +51,40 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+
+// This method helps us to create the collections and the documents inside for the first time.
+export const addCollectionAndDocuments = async (
+  collectionKey: string,
+  objectsToAdd: Category[]
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("done");
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce<DocumentData>(
+    (acc, docSnapshot) => {
+      const { title, items } = docSnapshot.data();
+      acc[title.toLowerCase()] = items;
+      return acc;
+    },
+    {}
+  );
+
+  return categoryMap;
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth: User,
@@ -90,5 +135,6 @@ export const SignInAuthUserWithEmailAndPassword = async (
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) =>
-  onAuthStateChanged(auth, callback);
+export const onAuthStateChangedListener = (
+  callback: (user: User | null) => void
+) => onAuthStateChanged(auth, callback);
