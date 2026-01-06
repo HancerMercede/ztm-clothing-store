@@ -10,7 +10,7 @@ interface ButtonProps {
 const BUTTON_TYPES_CLASSES = {
   google: "google-sign-in",
   inverted: "inverted",
-} as const;
+};
 
 type ButtonType = keyof typeof BUTTON_TYPES_CLASSES;
 const Button = ({ children, buttonType, ...otherProps }: ButtonProps) => {
