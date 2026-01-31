@@ -1,19 +1,12 @@
+import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavigationBar from "./routes/Navigation/NavigationBar";
 import Home from "./routes/home/Home";
 import Authentication from "./routes/authentication/Authentication";
-import { Shop } from "./routes/Shop/Shop";
+import Shop from "./routes/Shop/Shop";
 import CheckOut from "./routes/CheckOut/CheckOut";
-import { Suspense } from "react";
+import Contact from "./routes/Contact/Contact";
 
-export const Contact = () => {
-  return (
-    <div>
-      <h2>Contact us</h2>
-      <span>These are our socials networks: Instagram, Facebook, X </span>
-    </div>
-  );
-};
 function App() {
   return (
     <>

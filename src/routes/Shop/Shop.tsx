@@ -3,7 +3,7 @@ import "./Shop.styles.scss";
 import { CategoriesPreview } from "../Categories-Preview/CategoriesPreview";
 import { Category } from "../Category/Category";
 
-export const Shop = () => {
+const Shop = () => {
   return (
     <Routes>
       <Route index element={<CategoriesPreview />} />
@@ -11,3 +11,5 @@ export const Shop = () => {
     </Routes>
   );
 };
+
+export default Shop;
