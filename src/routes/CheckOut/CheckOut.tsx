@@ -3,7 +3,7 @@ import "./CheckOut.styles.scss";
 import { CartContext } from "../../context/Cart/Cart.Context";
 import { CheckOutItem } from "../../components/CheckOutItem/CheckOutItem";
 
-export const CheckOut = () => {
+const CheckOut = () => {
   const { cartItems, cartTotal } = useContext(CartContext);
   return (
     <div className="checkout-container">
@@ -21,3 +21,5 @@ export const CheckOut = () => {
     </div>
   );
 };
+
+export default CheckOut;

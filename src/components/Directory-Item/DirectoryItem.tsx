@@ -8,13 +8,13 @@ export const DirectoryItem = ({ category }: CategoryItemProps) => {
 
   const onNavigateHandler = () => navigate(route);
   return (
-    <div className="directory-item-container">
+    <div className="directory-item-container" onClick={onNavigateHandler}>
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
       <div className="directory-item-body-container">
-        <h2 onClick={onNavigateHandler}>{title}</h2>
+        <h2>{title}</h2>
         <p>Shop Now </p>
       </div>
     </div>
