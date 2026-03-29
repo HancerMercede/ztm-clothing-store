@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NavigationBar from "./routes/Navigation/NavigationBar";
 import Home from "./routes/home/Home";
 import Authentication from "./routes/authentication/Authentication";
