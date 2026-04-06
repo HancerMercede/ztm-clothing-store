@@ -24,3 +24,10 @@
     }
   }
 }
+.header-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 15px;
+  margin-bottom: 5px;
+}

@@ -7,6 +7,7 @@ import {
   signInWithGooglePopup,
 } from "../../utils/Firebase/firebase";
 import { FirebaseError } from "firebase/app";
+import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const defaultFormFields = {
@@ -16,6 +17,8 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const navigate = useNavigate();
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -23,6 +26,7 @@ const SignInForm = () => {
 
   const SignInWithGoogle = async () => {
     await signInWithGooglePopup();
+    navigate("/");
   };
 
   const resetFormFields = () => {
@@ -32,9 +36,15 @@ const SignInForm = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await SignInAuthUserWithEmailAndPassword(email, password);
+      const susccess = await SignInAuthUserWithEmailAndPassword(
+        email,
+        password,
+      );
 
-      resetFormFields();
+      if (susccess) {
+        resetFormFields();
+        navigate("/");
+      }
     } catch (error) {
       if (error instanceof FirebaseError) {
         switch (error.code) {
