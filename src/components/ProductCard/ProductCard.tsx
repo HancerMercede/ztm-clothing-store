@@ -9,6 +9,7 @@ export const ProductCard = ({ product }: ProductProps) => {
   const { addItemToCart } = useContext(CartContext);
 
   const AddProductToCart = () => addItemToCart(product);
+
   return (
     <div className="product-card-container">
       <img src={imageUrl} alt={`${name}`} />

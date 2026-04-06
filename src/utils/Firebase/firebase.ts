@@ -55,7 +55,7 @@ export const db = getFirestore();
 // This method helps us to create the collections and the documents inside for the first time.
 export const addCollectionAndDocuments = async (
   collectionKey: string,
-  objectsToAdd: Category[]
+  objectsToAdd: Category[],
 ) => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
@@ -74,13 +74,14 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
+
   const categoryMap = querySnapshot.docs.reduce<DocumentData>(
     (acc, docSnapshot) => {
       const { title, items } = docSnapshot.data();
       acc[title.toLowerCase()] = items;
       return acc;
     },
-    {}
+    {},
   );
 
   return categoryMap;
@@ -88,7 +89,7 @@ export const getCategoriesAndDocuments = async () => {
 
 export const createUserDocumentFromAuth = async (
   userAuth: User,
-  additionalInformation = {}
+  additionalInformation = {},
 ) => {
   if (!userAuth) return;
 
@@ -117,7 +118,7 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string
+  password: string,
 ): Promise<UserCredential> => {
   if (!email || !password) throw new Error("Missing email or password");
 
@@ -126,7 +127,7 @@ export const createAuthUserWithEmailAndPassword = async (
 
 export const SignInAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string
+  password: string,
 ): Promise<UserCredential> => {
   if (!email || !password) throw new Error("Missing email or password");
 
@@ -136,5 +137,5 @@ export const SignInAuthUserWithEmailAndPassword = async (
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (
-  callback: (user: User | null) => void
+  callback: (user: User | null) => void,
 ) => onAuthStateChanged(auth, callback);
