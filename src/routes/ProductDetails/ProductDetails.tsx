@@ -9,17 +9,12 @@ import { useProducts } from "../../Hooks/useProducts";
 export const ProductDetails = () => {
   const { productId } = useParams<{ productId: string }>();
   const { allProducts } = useProducts();
-
   const { addItemToCart } = useContext(CartContext);
 
   const product: Product | null = useMemo(() => {
     const id = parseInt(productId || "0", 10);
 
-    const found = allProducts.find((p) => p.id === id);
-
-    if (found) return found;
-
-    return null;
+    return allProducts.find((p) => p.id === id) ?? null;
   }, [productId, allProducts]);
 
   if (!product) {

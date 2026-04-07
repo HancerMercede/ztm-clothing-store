@@ -28,15 +28,18 @@ export const SearchBar = ({ filter, FilterChange }: IFilterProps) => {
 
   return (
     <div className="search-container">
-      <input
-        type="text"
-        placeholder="Search products..."
-        value={filter}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        className="input-search"
-      />
+      <form>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={filter}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          className="input-search"
+        />
+      </form>
+
       {isFocused && filteredProducts.length > 0 && (
         <div className="search-dropdown">
           {filteredProducts.map((product) => (
