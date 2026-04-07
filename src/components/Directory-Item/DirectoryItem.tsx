@@ -6,6 +6,7 @@ export const DirectoryItem = ({ category }: CategoryItemProps) => {
   const { title, imageUrl, route } = category;
   const navigate = useNavigate();
 
+  console.log(route);
   const onNavigateHandler = () => navigate(route);
   return (
     <div className="directory-item-container" onClick={onNavigateHandler}>

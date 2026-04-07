@@ -39,7 +39,6 @@ export const SearchBar = ({ filter, FilterChange }: IFilterProps) => {
           className="input-search"
         />
       </form>
-
       {isFocused && filteredProducts.length > 0 && (
         <div className="search-dropdown">
           {filteredProducts.map((product) => (
