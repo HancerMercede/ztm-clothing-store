@@ -22,15 +22,12 @@ const NavigationBar = () => {
   return (
     <>
       <div className="navigation">
-        <div className="header-wrapper">
-          <Link className="logo-container" to="/">
-            <CrownLogo className="logo" />
-          </Link>
-          <div>
-            <SearchBar filter={filter} FilterChange={handleChange} />
-          </div>
-        </div>
+        <Link className="logo-container" to="/">
+          <CrownLogo />
+        </Link>
+
         <div className="nav-links-container">
+          <SearchBar filter={filter} FilterChange={handleChange} />
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>

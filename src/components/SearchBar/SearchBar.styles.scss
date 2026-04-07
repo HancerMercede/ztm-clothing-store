@@ -3,10 +3,14 @@
   flex-direction: row;
   gap: 2px;
   position: relative;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .input-search {
-  border: 1px solid dimgray;
+  border: 1px solid rgb(240, 237, 237);
   border-radius: 5px;
   padding: 8px 15px;
   outline: none;
