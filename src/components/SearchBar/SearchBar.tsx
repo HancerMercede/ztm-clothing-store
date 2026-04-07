@@ -1,8 +1,7 @@
-import { useState, useContext, useMemo, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { CategoriesContext } from "../../context/Categories/Categories.Context";
-import type { Product } from "../../types";
 import "./SearchBar.styles.scss";
+import { useProducts } from "../../Hooks/useProducts";
 
 interface IFilterProps {
   filter: string;
@@ -11,28 +10,8 @@ interface IFilterProps {
 
 export const SearchBar = ({ filter, FilterChange }: IFilterProps) => {
   const navigate = useNavigate();
-  const { categoriesMap } = useContext(CategoriesContext);
+  const { filteredProducts } = useProducts(filter);
   const [isFocused, setIsFocused] = useState(false);
-
-  const allProducts = useMemo(() => {
-    const products: Product[] = [];
-
-    Object.values(categoriesMap).forEach((categoryProducts) => {
-      products.push(...categoryProducts);
-    });
-
-    return products;
-  }, [categoriesMap]);
-
-  const filteredProducts = useMemo(() => {
-    if (!filter.trim()) return [];
-
-    const searchTerm = filter.toLowerCase();
-
-    return allProducts
-      .filter((product) => product.name.toLowerCase().includes(searchTerm))
-      .slice(0, 5);
-  }, [filter, allProducts]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     FilterChange(e.target.value);
