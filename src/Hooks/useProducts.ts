@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { CategoriesContext } from "../context/Categories/Categories.Context";
 import type { Product } from "../types";
 
-export const useProducts = (filter: string) => {
+export const useProducts = (filter?: string) => {
   const { categoriesMap } = useContext(CategoriesContext);
 
   const allProducts = useMemo(() => {
@@ -16,7 +16,7 @@ export const useProducts = (filter: string) => {
   }, [categoriesMap]);
 
   const filteredProducts: Product[] = useMemo(() => {
-    if (!filter.trim()) return [];
+    if (!filter?.trim()) return [];
 
     const searchTerm = filter.toLowerCase();
 
@@ -25,5 +25,5 @@ export const useProducts = (filter: string) => {
       .slice(0, 5);
   }, [filter, allProducts]);
 
-  return { filteredProducts };
+  return { filteredProducts, allProducts };
 };

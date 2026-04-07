@@ -1,27 +1,26 @@
 import { useContext, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { CategoriesContext } from "../../context/Categories/Categories.Context";
 import { CartContext } from "../../context/Cart/Cart.Context";
 import type { Product } from "../../types";
 import Button from "../../components/Button/Button";
 import "./ProductDetails.styles.scss";
+import { useProducts } from "../../Hooks/useProducts";
 
 export const ProductDetails = () => {
   const { productId } = useParams<{ productId: string }>();
-  const { categoriesMap } = useContext(CategoriesContext);
+  const { allProducts } = useProducts();
+
   const { addItemToCart } = useContext(CartContext);
 
   const product: Product | null = useMemo(() => {
     const id = parseInt(productId || "0", 10);
-    const categories = categoriesMap as Record<string, Product[]>;
 
-    for (const categoryProducts of Object.values(categories)) {
-      const found = categoryProducts.find((p) => p.id === id);
-      if (found) return found;
-    }
+    const found = allProducts.find((p) => p.id === id);
+
+    if (found) return found;
 
     return null;
-  }, [productId, categoriesMap]);
+  }, [productId, allProducts]);
 
   if (!product) {
     return (
