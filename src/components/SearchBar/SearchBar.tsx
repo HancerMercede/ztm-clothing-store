@@ -1,36 +1,40 @@
-import { useState, useContext, useMemo } from "react";
+import { useState, useContext, useMemo, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { CategoriesContext } from "../../context/Categories/Categories.Context";
 import type { Product } from "../../types";
 import "./SearchBar.styles.scss";
 
-interface FilterProps {
+interface IFilterProps {
   filter: string;
   FilterChange: (f: string) => void;
 }
 
-export const SearchBar = ({ filter, FilterChange }: FilterProps) => {
+export const SearchBar = ({ filter, FilterChange }: IFilterProps) => {
   const navigate = useNavigate();
   const { categoriesMap } = useContext(CategoriesContext);
   const [isFocused, setIsFocused] = useState(false);
 
   const allProducts = useMemo(() => {
     const products: Product[] = [];
+
     Object.values(categoriesMap).forEach((categoryProducts) => {
       products.push(...categoryProducts);
     });
+
     return products;
   }, [categoriesMap]);
 
   const filteredProducts = useMemo(() => {
     if (!filter.trim()) return [];
+
     const searchTerm = filter.toLowerCase();
+
     return allProducts
       .filter((product) => product.name.toLowerCase().includes(searchTerm))
       .slice(0, 5);
   }, [filter, allProducts]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     FilterChange(e.target.value);
   };
 

@@ -19,6 +19,7 @@ export const ProductDetails = () => {
       const found = categoryProducts.find((p) => p.id === id);
       if (found) return found;
     }
+
     return null;
   }, [productId, categoriesMap]);
 

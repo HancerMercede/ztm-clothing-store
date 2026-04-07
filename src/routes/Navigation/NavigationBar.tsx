@@ -15,7 +15,10 @@ const NavigationBar = () => {
 
   const [filter, sertFilter] = useState("");
 
-  console.log(filter);
+  const handleChange = (f: string) => {
+    sertFilter(f);
+  };
+
   return (
     <>
       <div className="navigation">
@@ -24,7 +27,7 @@ const NavigationBar = () => {
             <CrownLogo className="logo" />
           </Link>
           <div>
-            <SearchBar filter={filter} FilterChange={(f) => sertFilter(f)} />
+            <SearchBar filter={filter} FilterChange={handleChange} />
           </div>
         </div>
         <div className="nav-links-container">
